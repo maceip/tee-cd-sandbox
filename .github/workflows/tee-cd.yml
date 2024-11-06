@@ -90,8 +90,9 @@ jobs:
           run: echo "${{needs.update-reverse-proxy.outputs.teeport}}" | tee >> $GITHUB_STEP_SUMMARY
 
         - name: get hardware measurement
+          working-directory: ${{ github.workspace }}/crates/notary/server/tee
           run: |
-             bash .github/scripts/gramine.sh sgx
+             bash ${{ github.workspace }}.github/scripts/gramine.sh sgx
  
   artifact-deploy:
       if: ${{needs.update-reverse-proxy.outputs.deploy == 'new' }}
