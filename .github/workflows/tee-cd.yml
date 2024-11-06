@@ -92,7 +92,7 @@ jobs:
         - name: get hardware measurement
           working-directory: ${{ github.workspace }}/crates/notary/server/tee
           run: |
-               ls ${{ github.workspace }} &&  pwd ${{ github.workspace }} && \ 
+               ls && \ 
                bash ${{ github.workspace }}/.github/scripts/gramine.sh sgx
  
   artifact-deploy:
