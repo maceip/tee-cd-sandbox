@@ -92,8 +92,7 @@ jobs:
         - name: get hardware measurement
           working-directory: ${{ github.workspace }}/crates/notary/server/tee
           run: |
-               cd ../../../.. && ls && \ 
-               bash ./.github/scripts/gramine.sh sgx
+               cd ../../../.. && ./.github/scripts/gramine.sh sgx
  
   artifact-deploy:
       if: ${{needs.update-reverse-proxy.outputs.deploy == 'new' }}
