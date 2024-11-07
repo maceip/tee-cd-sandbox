@@ -168,7 +168,7 @@ jobs:
           uses: actions/attest-sbom@v1
           with:
             subject-name: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
-            subject-digest: ${{ steps.push.outputs.digest }}
+            subject-digest: ${{ steps.deploypush.outputs.digest }}
             subject-path: "${{ env.GIT_COMMIT_HASH }}.sbom.spdx.json"
         - uses: anchore/sbom-action/publish-sbom@v0
 
