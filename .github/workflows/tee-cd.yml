@@ -149,6 +149,8 @@ jobs:
           env:
             # reproducible builds: https://github.com/moby/buildkit/blob/master/docs/build-repro.md#source_date_epoch
             SOURCE_DATE_EPOCH: ${{ env.GIT_COMMIT_HASH }}
+          # attestation section ::
+          # https://docs.docker.com/build/ci/github-actions/attestations/
         - name: Attest
           uses: actions/attest-build-provenance@v1
           id: attest
