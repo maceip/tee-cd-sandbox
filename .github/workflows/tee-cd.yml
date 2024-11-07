@@ -42,10 +42,9 @@ jobs:
         run: |
           echo "tag: $RELEASE_TAG"
           NEXT_PORT=$(bash cd-scripts/tee/azure/updateproxy.sh 'cd-scripts/tee/azure/Caddyfile' $RELEASE_TAG)
-          echo "newport=$NEXT_PORT"
-          echo "hello"
           echo "newport=$NEXT_PORT" >> $GITHUB_OUTPUT
           echo "new deploy port: $NEXT_PORT  🚀" >> $GITHUB_STEP_SUMMARY
+          chmod +r -R cd-scripts/tee/azure/
           
       - name: Deploy updated Caddyfile to server
         if: ${{ steps.portbump.outputs.deploy == 'new' }}
