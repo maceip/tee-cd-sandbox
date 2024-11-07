@@ -41,7 +41,7 @@ jobs:
 
         run: |
           echo "tag: $RELEASE_TAG"
-          NEXT_PORT=$(bash cd-scripts/tee/azure/updateproxy.sh '/etc/caddy/Caddyfile' $RELEASE_TAG)
+          NEXT_PORT=$(bash cd-scripts/tee/azure/updateproxy.sh 'cd-scripts/tee/azure/Caddyfile' $RELEASE_TAG)
           echo "newport=$NEXT_PORT" >> $GITHUB_OUTPUT
           echo "new deploy port: $NEXT_PORT  🚀" >> $GITHUB_STEP_SUMMARY
           
