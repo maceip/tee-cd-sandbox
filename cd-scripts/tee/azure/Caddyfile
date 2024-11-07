@@ -20,7 +20,9 @@
 
 # 
 #  server block, acme turned on (default when using dns)
-#  reverse proxy with fail_duration + lb will try upstream's sequentially (fallback)
+#  reverse proxy with fail_duration + lb will try upstream's sequentially (fallback):
+#    e.g. => `reverse_proxy :4000 :5000 10.10.10.10:1000 tlsnotary.org:443`
+#    will always deliver to :4000 if its up, but if :4000 is down for more than 4s it trys the next one
 # # # #
 
 notary.codes {
