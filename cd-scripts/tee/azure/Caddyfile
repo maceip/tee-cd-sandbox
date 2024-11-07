@@ -26,6 +26,15 @@
 # # # #
 
 notary.codes {
+    handle_path /v0.1.0-alpha.4* {
+        reverse_proxy :4006 :3333 {
+            lb_try_duration 4s
+            fail_duration 10s
+            lb_policy header X-Upstream {
+                fallback first
+            }
+        }
+    }
     handle_path /v0.1.0-alpha.3* {
         reverse_proxy :4005 :3333 {
             lb_try_duration 4s
