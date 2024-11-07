@@ -20,8 +20,8 @@ server:
     <h1>notary server :: at your service</h1>
     <h3>tlsnotary {version}</h3>
     <blink>{public_key}</blink>
-    <h4>remote attestation</h4>
-    <a href="/v{version}/info">available here</a>
+    <h4>check to see if the TEE measurement matches the one github signed:</h4>
+    <a href="https://github.com/tlsnotary/tlsn/releases/download/{version}/{version}.sbom.spdx.json">github build artifact available here</a>
     </body>
 
 notarization:
