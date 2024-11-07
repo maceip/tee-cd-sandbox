@@ -141,7 +141,6 @@ jobs:
           uses: docker/build-push-action@v6
           with:
             provenance: mode=max
-            platforms: linux/amd64,linux/arm64
             no-cache: true
             context: ${{ github.workspace }}/crates/notary/server/tee
             push: true
