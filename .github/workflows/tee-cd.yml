@@ -132,6 +132,7 @@ jobs:
         - name: Build and push
           uses: docker/build-push-action@v6
           with:
+            no-cache: true
             context: ${{ github.workspace }}/crates/notary/server/tee
             push: true
             tags: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
@@ -170,6 +171,7 @@ jobs:
         - name: Build and push
           uses: docker/build-push-action@v6
           with:
+            no-cache: true
             context: ${{ github.workspace }}/crates/notary/server/tee
             push: true
             tags: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
