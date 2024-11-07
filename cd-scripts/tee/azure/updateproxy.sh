@@ -79,6 +79,6 @@ else
     git add -A
     git commit -m "azure tee reverse proxy => port:$NEXT_PORT/${RELEASE_TAG}"
     git push
-    echo "deploy=new" >> $GITHUB_OUTPUT
+    #echo "deploy=new" >> $GITHUB_OUTPUT
     exit 0
 fi
