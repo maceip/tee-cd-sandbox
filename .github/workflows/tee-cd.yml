@@ -21,6 +21,8 @@ env:
 
 jobs:
   update-reverse-proxy:
+    permissions:
+      contents: write
     environment: tee
     runs-on: [self-hosted, linux]
     outputs:
