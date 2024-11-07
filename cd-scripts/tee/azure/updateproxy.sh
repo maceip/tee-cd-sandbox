@@ -34,10 +34,10 @@ add_new_handle_path() {
 
     # Add the new handle_path in the notary.codes block
     awk -v port="$new_port" -v hash="$commit_hash" '
-        /tee\.notary\.codes \{/ {
+        /notary\.codes \{/ {
             print;
             print "    handle_path /" hash "* {";
-            print "        reverse_proxy :" port " :3333 tlsnotary.org:443 {";
+            print "        reverse_proxy :" port " :3333 {";
             print "            lb_try_duration 4s";
             print "            fail_duration 10s";
             print "            lb_policy header X-Upstream {";
