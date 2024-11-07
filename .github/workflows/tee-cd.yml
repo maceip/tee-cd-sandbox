@@ -31,9 +31,6 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
-        with:
-          clean: false
-          set-safe-directory: false
       - name: update caddyfile
         id: portbump
         env:
