@@ -161,7 +161,7 @@ jobs:
         - name: Generate SBOM
           uses: anchore/sbom-action@v0
           with:
-            image: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}:latest
+            image: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
             format: "spdx-json"
             output-file: "${{ env.GIT_COMMIT_HASH }}.sbom.spdx.json"
         - name: Attest SBOM
