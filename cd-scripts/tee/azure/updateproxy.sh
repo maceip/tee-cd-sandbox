@@ -8,14 +8,14 @@ BASE_PORT=6061                      # The starting port for your reverse_proxy d
 # Function to check if handle_path for the given commit hash exists
 handle_path_exists() {
     local commit_hash=$1
-    echo "handle_path_exists $1 -- CADDYFILE: $CADDYFILE"
+    #echo "handle_path_exists $1 -- CADDYFILE: $CADDYFILE"
     grep -q "handle_path /${commit_hash}\*" "$CADDYFILE"
 }
 
 # Function to extract the port for a given commit hash
 extract_port_for_commit() {
     local commit_hash=$1
-    echo "extract_port_for_commit $1 -- 2: $2"
+    #echo "extract_port_for_commit $1 -- 2: $2"
     grep -Pzo "handle_path /${commit_hash}\* \{\n\s*reverse_proxy :(.*) " "$CADDYFILE" | grep -Poa "reverse_proxy :(.*) " | awk '{print $2}'
 }
 
