@@ -78,7 +78,7 @@ else
     git config user.email github-actions@github.com
     git add -A
     git commit -m "azure tee reverse proxy => port:$NEXT_PORT/${RELEASE_TAG}"
-    git push
+    git push --quiet
     #echo "deploy=new" >> $GITHUB_OUTPUT
     exit 0
 fi
