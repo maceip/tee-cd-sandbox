@@ -13,9 +13,9 @@ RUN             set -eux \
 
 
 RUN             apt update && apt install -y libssl-dev libclang-dev
-ARG             TLSN_TAG=dev
+ARG             TLSN_TAG=main
 ARG             TLSN_FT=tee_quote
-RUN             git clone --depth 1 -b $TLSN_TAG https://github.com/tlsnotary/tlsn /tlsn  && \
+RUN             git clone --depth 1 -b $TLSN_TAG https://github.com/maceip/tee-cd-sandbox /tlsn  && \
                 cargo build --release --bin notary-server --features $TLSN_FT --color always --manifest-path /tlsn/Cargo.toml
 RUN             cd tlsn/crates/notary/server/tee && gramine-sgx-gen-private-key && SGX=1 make
 
