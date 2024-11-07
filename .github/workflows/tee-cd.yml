@@ -130,11 +130,16 @@ jobs:
           uses: docker/build-push-action@v6
           with:
             provenance: mode=max
+            platforms: linux/amd64,linux/arm64
+
             no-cache: true
             context: ${{ github.workspace }}/crates/notary/server/tee
             push: true
             tags: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
             labels: ${{needs.update-reverse-proxy.outputs.teeport}}
+          env:
+            # reproducible builds: https://github.com/moby/buildkit/blob/master/docs/build-repro.md#source_date_epoch
+            SOURCE_DATE_EPOCH: ${{ env.GIT_COMMIT_HASH }}
         - name: run
           run: |
            docker run --device /dev/sgx_enclave --device /dev/sgx_provision --volume=/var/run/aesmd/aesm.socket:/var/run/aesmd/aesm.socket -p  ${{needs.update-reverse-proxy.outputs.teeport}}:7047 notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }} &
