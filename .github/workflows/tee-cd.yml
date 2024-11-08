@@ -160,7 +160,7 @@ jobs:
         - name: Attest
           uses: actions/attest-build-provenance@v1
           with:
-            subject-name: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
+            subject-name: prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
             subject-digest: ${{ steps.deploypush.outputs.digest }}
             push-to-registry: true
 
