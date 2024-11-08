@@ -149,7 +149,12 @@ jobs:
           env:
             # reproducible builds: https://github.com/moby/buildkit/blob/master/docs/build-repro.md#source_date_epoch
             SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
-
+        - name: Generate SBOM
+          uses: anchore/sbom-action@v0
+          with:
+            image:  notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
+            format: 'cyclonedx-json'
+            output-file: 'sbom.cyclonedx.json'
           # attestation section ::
           # https://docs.docker.com/build/ci/github-actions/attestations/
         - name: Attest
@@ -157,21 +162,9 @@ jobs:
           with:
             subject-name: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
             subject-digest: ${{ steps.deploypush.outputs.digest }}
-        - name: Generate SBOM
-          uses: anchore/sbom-action@v0
-          with:
-            image: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
-            format: 'cyclonedx-json'
-            output-file: "${{ env.GIT_COMMIT_HASH }}.sbom.cyclonedx.json"
-        - name: Attest SBOM
-          uses: actions/attest-sbom@v1
-          id: attest
-          with:
-            subject-name: notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }}
-            subject-digest: ${{ steps.deploypush.outputs.digest }}
-            sbom-path: "${{ env.GIT_COMMIT_HASH }}.sbom.cyclonedx.json"
             push-to-registry: true
-        - uses: anchore/sbom-action/publish-sbom@v0            
+
+
         - name: run
           run: |
            docker run --device /dev/sgx_enclave --device /dev/sgx_provision --volume=/var/run/aesmd/aesm.socket:/var/run/aesmd/aesm.socket -p  ${{needs.update-reverse-proxy.outputs.teeport}}:7047 notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }} &
