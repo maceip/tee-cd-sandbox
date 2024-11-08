@@ -171,7 +171,7 @@ jobs:
             subject-digest: ${{ steps.deploypush.outputs.digest }}
             subject-path: "${{ env.GIT_COMMIT_HASH }}.sbom.cyclonedx.json"
             sbom-path: "${{ env.GIT_COMMIT_HASH }}.sbom.cyclonedx.json"
-            push-to-registry: true\
+            push-to-registry: true
         - uses: anchore/sbom-action/publish-sbom@v0            
         - name: run
           run: |
