@@ -155,7 +155,8 @@ jobs:
             subject-name: notaryserverbuilds.azurecr.io/prod/notary-sgx
             subject-digest: ${{ steps.push.outputs.digest }}
             push-to-registry: true
-        - name: run
+        -    
+          name: run
           run: |
             if [[ ${{ needs.update-reverse-proxy.outputs.deploy }} == 'new' ]]; then
               docker run --device /dev/sgx_enclave --device /dev/sgx_provision --volume=/var/run/aesmd/aesm.socket:/var/run/aesmd/aesm.socket -p  ${{needs.update-reverse-proxy.outputs.teeport}}:7047 notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }} &
@@ -163,4 +164,4 @@ jobs:
               old=$(docker ps --filter "name=${{needs.update-reverse-proxy.outputs.teeport}}")
               docker rm -f $old
               docker run --name ${{needs.update-reverse-proxy.outputs.teeport}} --device /dev/sgx_enclave --device /dev/sgx_provision --volume=/var/run/aesmd/aesm.socket:/var/run/aesmd/aesm.socket -p  ${{needs.update-reverse-proxy.outputs.teeport}}:7047 notaryserverbuilds.azurecr.io/prod/notary-sgx:${{ env.GIT_COMMIT_HASH }} &
-           fi
+            fi
