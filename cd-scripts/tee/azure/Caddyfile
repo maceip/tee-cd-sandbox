@@ -181,6 +181,15 @@ notary.codes {
      }
     }
 
+    handle_path /proxy* {
+     reverse_proxy :55688  {
+     lb_try_duration 4s
+     fail_duration 10s
+     lb_policy header X-Upstream {
+       fallback first
+      }
+     }
+    }
     handle  {
      root * /srv
      file_server
