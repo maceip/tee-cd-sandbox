@@ -162,7 +162,6 @@ jobs:
           with:
             subject-name: notaryserverbuilds.azurecr.io/prod/notary-sgx
             subject-digest: ${{ steps.push.outputs.digest }}
-            sbom-path: 'sbom.cyclonedx.json'
             push-to-registry: true
 
         - name: run
